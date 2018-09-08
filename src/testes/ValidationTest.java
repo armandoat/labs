@@ -1,10 +1,11 @@
 package testes;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import main.HappyNumber;
 
 /**
  * O objetivo do teste eh demonstrar algumas etapas de construcao do algoritimo numeros felizes 
@@ -102,9 +103,9 @@ public class ValidationTest {
 	public void isAHappyNumberTest() {
 		
 		int number = 7;
-		short expectedResult = 1;
+		HappyNumber validator = new HappyNumber();
 		
-		assertEquals(number + " eh um numero feliz", this.calculateHappyNumber(number), expectedResult);
+		assertTrue(number + " eh um numero feliz", validator.isHappyNumber(number));
 	}
 	
 	/**
@@ -114,32 +115,8 @@ public class ValidationTest {
 	public void isNotAHappyNumberTest() {
 		
 		int number = 4;
-		short expectedResult = 1;
+		HappyNumber validator = new HappyNumber();
 		
-		assertNotEquals(number + " não eh um numero feliz", this.calculateHappyNumber(number), expectedResult);
-	}
-
-	/**
-	 * Implementacao do algoritimo que calcula um numero que passarah pela verificacao de numero feliz.
-	 * 
-	 * @param number
-	 * @return
-	 */
-	private long calculateHappyNumber(int number) {
-
-		long result = (long) Math.pow(number, 2);
-		char[] numbersArray = null;
-		
-		while(result >= 10) {
-			numbersArray = new Long(result).toString().toCharArray();
-			result = 0;
-			if(numbersArray.length >= 2) {
-				for (char c : numbersArray) {
-					result += Math.pow(Character.getNumericValue(c), 2);
-				}
-			}
-		}
-		
-		return result;
+		assertTrue(number + " não eh um numero feliz", !validator.isHappyNumber(number));
 	}
 }
